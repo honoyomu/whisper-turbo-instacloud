@@ -11,7 +11,7 @@ COPY Makefile ./
 COPY src ./src
 COPY tools ./tools
 RUN make server OPENMP=-fopenmp CFLAGS='-O3 -std=c11 -Wall -Wextra -Wpedantic -Werror'
-RUN make x86-tools OPENMP=-fopenmp
+RUN make build/import-ggml OPENMP=-fopenmp CFLAGS='-O3 -std=c11 -Wall -Wextra -Wpedantic -Werror'
 
 FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y --no-install-recommends \
