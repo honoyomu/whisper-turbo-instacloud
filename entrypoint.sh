@@ -3,6 +3,7 @@ set -eu
 
 MODEL_DIR="/data"
 MODEL_PATH="$MODEL_DIR/turbo-q8.whtrbo"
+BIND_HOST="${BIND_HOST:-::}"
 GGML_PATH="$MODEL_DIR/ggml-large-v3-turbo.bin"
 GGML_URL="https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin"
 GGML_SHA256="1fc70f774d38eb169993ac391eea357ef47c88757ef72ee5943879b7e8e2bc69"
@@ -23,4 +24,4 @@ if [ ! -s "$MODEL_PATH" ]; then
   echo "[entrypoint] model ready at $MODEL_PATH" >&2
 fi
 
-exec /usr/local/bin/whisper-turbo-server "$MODEL_PATH" "${PORT:-8080}" 0.0.0.0
+exec /usr/local/bin/whisper-turbo-server "$MODEL_PATH" "${PORT:-8080}" "$BIND_HOST"
